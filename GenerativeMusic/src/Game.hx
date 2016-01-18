@@ -2,6 +2,7 @@ package ;
 
 #if flash
 import flash.net.FileReference;
+import music.ChordProgression;
 import music.CircleOfFifth;
 import music.Scale;
 import music.song.HatSoundProvider;
@@ -30,6 +31,7 @@ import ui.KeyboardValueControl;
 class Game extends Sprite
 {
 	var synth = new synth.Synth();
+	var soundProvier:Instrument1SoundProvider;
 
 	public function new() 
 	{
@@ -45,7 +47,9 @@ class Game extends Sprite
 		//kick.soundProvider = new KickSoundProvider();
 		//snare.soundProvider = new SnareSoundProvider();
 		//hat.soundProvider = new HatSoundProvider();
-		instrument1.soundProvider = new Instrument1SoundProvider();
+		soundProvier = new Instrument1SoundProvider();
+		instrument1.soundProvider = soundProvier;
+		
 		
 		synth.instruments = [kick, snare, hat, instrument1];
 	}
@@ -80,7 +84,8 @@ class Game extends Sprite
 		var encoder = new utils.WavEncoder();
 		var encoded = encoder.encode(data, 2);
 		#if flash
-		new FileReference().save(encoded, "music.wav");
+		var title = "prelude in " + soundProvier.titles[soundProvier.index];
+		new FileReference().save(encoded, title+".wav");
 		#end
 	}
 		

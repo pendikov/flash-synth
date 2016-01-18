@@ -1,4 +1,5 @@
 package synth.instruments;
+import motion.Actuate;
 import synth.filters.LowPass;
 import synth.Instrument;
 
@@ -8,6 +9,7 @@ import synth.Instrument;
  */
 class Instrument1 extends Instrument
 {
+	var filter = new LowPass();
 
 	public function new() 
 	{
@@ -17,7 +19,7 @@ class Instrument1 extends Instrument
 		
 		envelope.attackTime = 0.01;
 		envelope.decayTime = 0.7;
-		envelope.releaseTime = 5.6;
+		envelope.releaseTime = 2;
 
 		envelope.attackMaxValue = 0.6;
 		envelope.sustainMaxValue = 0.4;
@@ -26,7 +28,8 @@ class Instrument1 extends Instrument
 		oscillators[1].amplitude = 0.04;
 		volume = 1;
 		
-		filters.push(new LowPass());
+		
+		filters.push(filter);
 	}
 	
 }
